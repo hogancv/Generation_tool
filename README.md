@@ -12,11 +12,11 @@ pip install -r requirements.txt -i
 
 在 app.py 中修改。pypinyin 库只会对中文字符做首字母处理。
 
-![image-20240107203556499](\images\image-20240107203556499.png)
+![image-20240107203556499](https://github.com/65548963/Generation_tool/blob/main/images\image-20240107203556499.png)
 
 点击新建文件夹即可生成文件夹，生成路径和模板路径在 app.py 中修改。采用绝对路径
 
-![image-20240107204131197](D:\ty_photo\image-20240107204131197.png)
+![image-20240107204131197](https://github.com/65548963/Generation_tool/blob/main/images/image-20240107204131197.png)
 
 点击 HTML 按钮生成 title 和 meta，并复制到剪切板。粘贴到模板后使用 shift+alt+F 进行代码格式化
 
@@ -34,4 +34,4 @@ nav 生成需注意不要保留空格。
 
 带括号格式可直接处理，多生成的空值删除
 
-![image-20240107205559522](D:\ty_photo\image-20240107205559522.png)
+![image-20240107205559522](https://github.com/65548963/Generation_tool/blob/main/images/image-20240107205559522.png)
