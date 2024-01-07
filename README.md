@@ -12,7 +12,7 @@ pip install -r requirements.txt -i
 
 在 app.py 中修改。pypinyin 库只会对中文字符做首字母处理。
 
-![image-20240107203556499](Flask\images\image-20240107203556499.png)
+![image-20240107203556499](\images\image-20240107203556499.png)
 
 点击新建文件夹即可生成文件夹，生成路径和模板路径在 app.py 中修改。采用绝对路径
 
