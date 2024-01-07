@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
+  <title>【专题】标题</title>
+  <meta name="keywords" content="关键词" />
+  <meta name="description" content="导读" />
+
+  <meta itemprop="image" content="/Public/home/images/zf.jpg" />
+  <link rel="icon" href="/Public/home/images/ico/wjs.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="../upload_data/assets/index.css" />
+  <link rel="stylesheet" href="../upload_data/assets/theme.css" />
+  <script src="/Public/home/js/vue.js"></script>
+  <script src="/Public/home/js/jquery.min.js"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <script src="/Public/home/js/wxopen.js?v0.1.5"></script>
+</head>
+
+<body>
+  <div id="app">
+    <Top></Top>
+
+    <div class="main orange">
+      <Banner :banner="banner"></Banner>
+
+      <div class="content-box">
+        <div class="left-box">
+          <Articles :article="article"></Articles>
+          <Articles :article="article2"></Articles>
+          <Articles :article="article4"></Articles>
+          <Project :project="project"></Project>
+        </div>
+
+        <Right></Right>
+      </div>
+    </div>
+
+    <Bottom></Bottom>
+  </div>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../upload_data/assets/request.js"></script>
+  <script src="../upload_data/assets/components5.js"></script>
+
+  <!-- 组件参数 -->
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          // 横幅标题
+          banner: {
+            img: "img/banner.jpg",
+            title: ["禁止直播带货？杭州官方辟谣！", ""],
+            text: "禁止直播带货？杭州官方辟谣！",
+          },
+
+          // 滚动播报
+          article: {
+            title: {
+              topic: "滚动播报",
+              more: {
+                name: "我要投诉",
+                url: "/Index/complain.html",
+              },
+            },
+            params: {
+              p: 1,
+              n: 4,
+              terms: "禁止 直播",
+            },
+          },
+
+          article2: {
+            title: {
+              topic: "相关平台",
+              more: {
+                name: "企业库",
+                url: "http://cop.100ec.cn/",
+              },
+            },
+
+            
+            nav: [{
+                value: "抖音 直播",
+                label: "抖音"
+              },
+              {
+                value: "快手 直播",
+                label: "快手"
+              },
+              {
+                value: "淘宝 直播",
+                label: "淘宝"
+              },
+              {
+                value: "视频号 直播",
+                label: "视频号"
+              },
+              {
+                value: "京东 直播",
+                label: "京东"
+              },
+              {
+                value: "多多 直播",
+                label: "多多"
+              },
+              {
+                value: "小红书 直播",
+                label: "小红书"
+              },
+            ],
+            params: {
+              p: 1,
+              n: 4,
+              terms: "天猫 服饰",
+            },
+          },
+          article4: {
+            title: {
+              topic: "相关点评",
+            },
+            nav: [{
+                value: "快评 直播",
+                label: "电商快评"
+              },
+              {
+                value: "莫岱青 直播",
+                label: "莫岱青"
+              },
+              {
+                value: "庄帅 直播",
+                label: "庄帅"
+              },
+              {
+                value: "李旻 直播",
+                label: "李旻"
+              },
+              {
+                value: "曹磊 直播",
+                label: "曹磊"
+              },
+            ],
+            params: {
+              p: 1,
+              n: 4,
+              terms: "快评 直播",
+            },
+          },
+
+          project: {
+            title: {
+              topic: "相关专题",
+            },
+            list: [{
+                body: "/zt/hzszy/",
+                image: "/zt/hzszy/img/550.gif",
+              },
+              {
+                body: "/zt/hzzbdyc/",
+                image: "/zt/hzzbdyc/img/550.gif",
+              }
+            ],
+          },
+        };
+      },
+    });
+  </script>
+
+  <!-- 个性样式 -->
+  <style>
+    .main .banner-title span {
+      display: block;
+      font-size: 45px;
+      font-weight: 900px;
+      text-align: center;
+      color: #111;
+      /* margin-bottom: 10px; */
+    }
+
+    .main .banner-takeaway {
+      width: 500px;
+      /* margin: auto; */
+      margin: auto 190px 0px 260px;
+      background: rgba(0, 0, 0, 0.5);
+      position: relative;
+      bottom: -31px;
+      padding: 10px;
+    }
+
+    .main .banner-takeaway a,
+    .main .banner-takeaway p {
+      color: #fff;
+      line-height: 20px;
+    }
+
+    .main .swiper-slide {
+      flex-shrink: 0;
+      width: 100%;
+      height: 450px;
+      overflow-y: scroll;
+      position: relative;
+    }
+
+    @media (max-width: 1100px) {
+      .main .banner-title span {
+        display: block;
+        font-size: 30px;
+        font-weight: bold;
+        color: #111;
+        margin-bottom: 10px;
+      }
+
+      .main .banner-takeaway {
+        width: 500px;
+        margin: auto;
+        background: rgba(0, 0, 0, 0.5);
+        position: relative;
+        padding: 10px;
+      }
+
+      .main .banner-takeaway a,
+      .main .banner-takeaway p {
+        color: #fff;
+        line-height: 20px;
+      }
+
+      .swiper-box img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
+</body>
+
+</html>

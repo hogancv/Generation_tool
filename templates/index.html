@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css" />
+    <script src="https://unpkg.zhimg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.zhimg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.zhimg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div style="display: flex">
+            <el-form ref="form" :model="form" label-width="60px" style="width: 300px">
+                <el-form-item label="标题">
+                    <el-input v-model="form.title" clearable></el-input>
+                </el-form-item>
+                <el-form-item label="导读">
+                    <el-input v-model="form.description" clearable></el-input>
+                </el-form-item>
+            </el-form>
+            <el-button type="primary" size="default" @click="submitForm()" style="margin: 10px; margin-bottom: 30px">生成
+            </el-button>
+        </div>
+        <div style="display: flex; align-items: center; width: 380px">
+            <el-button type="primary" size="default" @click="Folder_name=result.name;">名称</el-button>
+            <el-input v-model="Folder_name" clearable maxlength="10" show-word-limit
+                style="margin: 20px; width: 220px; margin-right: 10px"></el-input>
+            <el-button type="primary" size="default" @click="New_folder()">新建文件夹</el-button>
+        </div>
+        <div style="display: flex; justify-content: space-between; width: 380px">
+            <el-button type="primary" size="default" style="width: 150px" @click="Copy(result.html)">HTML</el-button>
+            <el-button type="primary" size="default" style="width: 150px" @click="Copy(result.banner)">banner
+            </el-button>
+        </div>
+        <div style="padding: 39px 0">
+            <el-input v-model="nav" placeholder="nav" clearable style="width: 280px; margin-right: 25px">
+            </el-input>
+            <el-button type="primary" size="default" @click="generate()">生成</el-button>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: function () {
+            return {
+                form: {
+                    title: "",
+                    description: "",
+                },
+                nav: "",
+                result: "",
+                Folder_name: "",
+            };
+        },
+        methods: {
+            submitForm() {
+                axios
+                    .post("/submit", this.form, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                    })
+                    .then((response) => {
+                        // 处理响应
+
+                        alert("已生成" + "\n" + JSON.stringify((response.data)));
+                        this.result = response.data;
+                    });
+            },
+            generate() {
+                axios
+                    .post(
+                        "/generate", {
+                            nav: this.nav,
+                        }, {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        }
+                    )
+                    .then((response) => {
+                        let result = "";
+                        response.data.nav.forEach((element) => {
+                            result += JSON.stringify(element) + ",";
+                        });
+                        this.Copy(result);
+                    })
+                    .catch((error) => {
+                        // 处理错误
+                    });
+            },
+            New_folder() {
+                axios
+                    .post(
+                        "/New_folder", {
+                            Folder_name: this.Folder_name,
+                        }, {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        }
+                    )
+                    .then((response) => {
+                        // 处理响应
+                        alert(response.data);
+                    });
+            },
+            Copy(text) {
+                // console.log(text);
+                var input = document.createElement("input");
+                document.body.appendChild(input);
+                input.setAttribute("value", text);
+                input.select();
+                if (document.execCommand("copy")) {
+                    document.execCommand("copy");
+                    alert(" 复制成功" + text);
+                }
+                document.body.removeChild(input);
+            },
+        },
+    });
+</script>
+
+<style>
+    .el-input .el-input__clear {
+        font-size: 24px;
+    }
+
+    .button-clicked {
+        background-color: #67c23a;
+        animation: button-click 0.5s;
+    }
+</style>
+
+</html>
