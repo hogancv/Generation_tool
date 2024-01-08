@@ -5,7 +5,7 @@ Python>=3.6
 ```
 git clone https://github.com/65548963/Generation_tool.git
 cd Flask
-pip install -r requirements.txt -i
+pip install -r requirements.txt
 python app.py
 ```
 
