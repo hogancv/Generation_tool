@@ -40,7 +40,6 @@
             <el-button type="primary" size="default" @click="generate()">生成</el-button>
         </div>
     </div>
-
 </body>
 
 <script>
@@ -68,7 +67,7 @@
                     .then((response) => {
                         // 处理响应
 
-                        alert("已生成" + "\n" + JSON.stringify((response.data)));
+                        alert("已生成" + "\n" + JSON.stringify(response.data));
                         this.result = response.data;
                     });
             },
@@ -84,8 +83,14 @@
                         }
                     )
                     .then((response) => {
+                        let swappedData = response.data.nav.map((item) => {
+                            return {
+                                value: item.value,
+                                label: item.label
+                            };
+                        });
                         let result = "";
-                        response.data.nav.forEach((element) => {
+                        swappedData.forEach((element) => {
                             result += JSON.stringify(element) + ",";
                         });
                         this.Copy(result);
