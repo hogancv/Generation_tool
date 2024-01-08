@@ -23,7 +23,7 @@ def submit():
     initials = ''.join([word[0][0] for word in lazy_pinyin(title)])
     result = initials[:9]
     keywords=jieba.analyse.extract_tags(description, topK=8, withWeight=False, allowPOS=())
-    keywords=",".join(keywords)
+    keywords="、".join(keywords)
 
     # 返回响应
     response = {'name': result,
@@ -92,12 +92,12 @@ def remove_brackets(text):
 @app.route('/New_folder', methods=['POST'])
 def submit2():
     name = request.form['Folder_name']
-    # 生成路径
-    path = r'D:\Tencent Files\1352566613\FileRecv\py\Flask\Generate'
+    # 需要修改 生成路径
+    path = r'D:\zt\Generate'
     try:
         os.makedirs(os.path.join(path, name))
-        # 模板文件路径
-        source_file = r'D:\Tencent Files\1352566613\FileRecv\py\Flask\tmp\index.html'
+        # 需要修改 模板文件路径
+        source_file = r'D:\zt\专题工具\Flask\zt_muban\index.html'
         shutil.copy2(source_file, os.path.join(path, name, os.path.basename(source_file)))  # 更新复制操作
         os.mkdir(os.path.join(path, name, "img"))  # 创建子文件夹
         return "文件夹创建成功"
